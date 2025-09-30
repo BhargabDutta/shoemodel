@@ -29,7 +29,7 @@ const baseRotations = {
       case "blue":
         selected = blueModel;
         break;
-      case "green":
+      case "sky blue":
         selected = greenModel;
         break;
       case "yellow":

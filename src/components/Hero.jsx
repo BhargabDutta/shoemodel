@@ -1,6 +1,6 @@
 // src/components/Hero.jsx
 export default function Hero({ title, subtitle, cta, variant, setVariant }) {
-    const variants = ["red", "blue", "green", "yellow"]; // 4 options
+    const variants = ["red", "blue", "sky blue", "yellow"]; // 4 options
     return (
       <section className="h-screen flex items-center justify-center px-6">
         <div className="text-center max-w-2xl">

@@ -35,7 +35,7 @@ export default function App() {
   }, []);
 
   const sections = [
-    { id: "hero", type: "hero", title: "The New Motion", subtitle: "Sculpted for speed and comfort.", cta: "Shop Now" },
+    { id: "hero", type: "hero", title: "The New Motion", subtitle: "Sculpted for speed and comfort.", cta: "" },
     { id: "features", title: "Engineered Performance", subtitle: "Featherlight, breathable, responsive.", align: "right" },
     { id: "materials", title: "Premium Materials", subtitle: "Sustainably sourced, long-lasting.", align: "left" },
     { id: "cta", title: "Limited Release", subtitle: "Secure yours today.", align: "center" },
@@ -46,9 +46,9 @@ export default function App() {
       variant === "red"
         ? "bg-red-900"
         : variant === "blue"
-        ? "bg-blue-900"
-        : variant === "green"
         ? "bg-blue-700"
+        : variant === "sky blue"
+        ? "bg-blue-900"
         : "bg-yellow-900"
     }`}>
       <div className='fixed h-screen w-full'>
