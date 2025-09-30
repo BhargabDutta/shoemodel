@@ -1,6 +1,11 @@
 // src/components/Hero.jsx
 export default function Hero({ title, subtitle, cta, variant, setVariant }) {
-    const variants = ["red", "blue", "sky blue", "yellow"]; // 4 options
+  const variants = [
+    { key: "classicRed", label: "Classic Red" },
+    { key: "navyBlue", label: "Navy Blue" },
+    { key: "skyBlue", label: "Sky Blue" },
+    { key: "airZoom", label: "Air Zoom" },
+  ];
     return (
       <section className="h-screen flex items-center justify-center px-6">
         <div className="text-center max-w-2xl">
@@ -14,16 +19,16 @@ export default function Hero({ title, subtitle, cta, variant, setVariant }) {
 
           {/* Variant buttons */}
         <div className="mt-6 flex gap-4 justify-center">
-          {variants.map((v) => (
-            <button
-              key={v}
-              onClick={() => setVariant(v)}
-              className={`px-4 py-2 rounded-lg font-bold border-2 transition
-                ${variant === v ? "border-white bg-white text-black" : "border-gray-500 bg-transparent text-white"}`}
-            >
-              {v.charAt(0).toUpperCase() + v.slice(1)}
-            </button>
-          ))}
+        {variants.map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setVariant(key)}
+            className={`px-4 py-2 rounded-lg font-bold border-2 transition
+              ${variant === key ? "border-white bg-white text-black" : "border-gray-500 bg-transparent text-white"}`}
+          >
+            {label}
+          </button>
+        ))}
         </div>
         </div>
       </section>

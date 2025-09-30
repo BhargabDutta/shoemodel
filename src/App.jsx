@@ -3,13 +3,27 @@ import { useEffect, useRef, useState } from "react";
 import ShoeCanvas from "./components/ShoeCanvas";
 import Hero from "./components/Hero";
 import Section from "./components/Section";
+import * as THREE from "three";
 
+const loadingManager = new THREE.LoadingManager();
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const sectionRefs = useRef([]);
-  const [variant, setVariant] = useState("red"); // default variant
+  const [variant, setVariant] = useState("classicRed"); // default variant
 
+  useEffect(() => {
+    loadingManager.onLoad = () => {
+      // All assets loaded
+      setIsLoading(false);
+    };
+  
+    loadingManager.onError = (url) => {
+      console.error(`Error loading: ${url}`);
+    };
+  }, []);
+  
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -42,17 +56,32 @@ export default function App() {
   ];
 
   return (
+    <>
+    {isLoading && (
+  <div className="fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-700">
+    <p className="text-white text-xl font-semibold animate-pulse">Loading...</p>
+  </div>
+)}
+
     <div className={`relative min-h-screen text-white overflow-x-hidden transition-colors duration-500 ${
-      variant === "red"
+      variant === "classicRed"
         ? "bg-red-900"
-        : variant === "blue"
+        : variant === "navyBlue"
         ? "bg-blue-700"
-        : variant === "sky blue"
-        ? "bg-blue-900"
-        : "bg-yellow-900"
+        : variant === "skyBlue"
+        ? "bg-sky-700"
+        : variant === "airZoom"
+        ? "bg-yellow-900"
+        : "bg-red-900" // fallback
     }`}>
+    
       <div className='fixed h-screen w-full'>
-      <ShoeCanvas sectionIndex={sectionIndex} isMobile={isMobile} variant={variant}/>
+      <ShoeCanvas 
+      sectionIndex={sectionIndex} 
+      isMobile={isMobile} 
+      variant={variant}
+      loadingManager={loadingManager}
+      />
       </div>
 
       <main className="relative z-10">
@@ -81,5 +110,6 @@ export default function App() {
         ))}
       </main>
     </div>
+    </>
   );
 }

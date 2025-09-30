@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Preload } from "@react-three/drei";
 import ShoeModel from "./ShoeModel";
 
-export default function ShoeCanvas({ sectionIndex, isMobile, variant }) {
+export default function ShoeCanvas({ sectionIndex, isMobile, variant,loadingManager }) {
   return (
     <Canvas
       className="canvas-pointer-none fixed inset-0 -z-10 h-ful w-full"
@@ -14,7 +14,12 @@ export default function ShoeCanvas({ sectionIndex, isMobile, variant }) {
       <directionalLight position={[5, 5, 5]} intensity={1} />
 
       <Suspense fallback={null}>
-        <ShoeModel sectionIndex={sectionIndex} isMobile={isMobile} variant={variant} />
+        <ShoeModel 
+        sectionIndex={sectionIndex} 
+        isMobile={isMobile} 
+        variant={variant}
+        loadingManager={loadingManager}
+        />
         <Preload all />
       </Suspense>
     </Canvas>
