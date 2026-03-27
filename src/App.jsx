@@ -13,16 +13,31 @@ export default function App() {
   const sectionRefs = useRef([]);
   const [variant, setVariant] = useState("classicRed"); // default variant
 
-  useEffect(() => {
-    loadingManager.onLoad = () => {
-      // All assets loaded
+// In App.jsx
+useEffect(() => {
+  let loadedCount = 0;
+  const totalModels = 4;
+
+  loadingManager.onStart = () => {
+    console.log("Loading started");
+  };
+
+  loadingManager.onProgress = (url, loaded, total) => {
+    console.log(`Progress: ${Math.round((loaded / total) * 100)}% - ${url}`);
+  };
+
+  loadingManager.onLoad = () => {
+    console.log("Manager says all items loaded");
+    // Small delay to let GLTF parsing finish
+    setTimeout(() => {
       setIsLoading(false);
-    };
-  
-    loadingManager.onError = (url) => {
-      console.error(`Error loading: ${url}`);
-    };
-  }, []);
+    }, 300);
+  };
+
+  loadingManager.onError = (url) => {
+    console.error(`Error loading: ${url}`);
+  };
+}, []);
   
 
   useEffect(() => {

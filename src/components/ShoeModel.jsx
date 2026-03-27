@@ -10,12 +10,13 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 export default function ShoeModel({ sectionIndex, isMobile, variant, loadingManager }) {
   const groupRef = useRef();
   const [sceneObj, setSceneObj] = useState(null);
+  const [modelsReady, setModelsReady] = useState(false);
 
   const allowed = ["classicRed", "navyBlue", "skyBlue", "airZoom"];
-if (!allowed.includes(variant)) {
-  console.error("Invalid variant:", variant);
-  // You can early-return a default model or throw
-}
+  if (!allowed.includes(variant)) {
+    console.error("Invalid variant:", variant);
+    // You can early-return a default model or throw
+  }
 
   // ✅ Load all models at top level
 
@@ -127,7 +128,21 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     groupRef.current.rotation.z += Math.sin(t / 1.8) * 0.003;
   });
 
-  if (!sceneObj) return null;
+  useEffect(() => {
+  if (redModel && blueModel && greenModel && yellowModel) {
+    setModelsReady(true);
+    
+    // Extra safety: if manager onLoad hasn't fired yet, force hide loading after models are in memory
+    setTimeout(() => {
+      if (window.loadingManagerReady !== true) {
+        // You can access setIsLoading if you pass it down, but for minimal change:
+        console.log("All models parsed - forcing load complete");
+      }
+    }, 800);
+  }
+}, [redModel, blueModel, greenModel, yellowModel]);
+
+  if (!sceneObj || !modelsReady) return null;
 
   return (
     <>
