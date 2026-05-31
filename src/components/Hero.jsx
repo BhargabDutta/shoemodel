@@ -47,7 +47,7 @@ export default function Hero({ title, subtitle, cta, variant, setVariant }) {
         <img 
           src={backgroundImage} 
           alt="variant background" 
-          className="w-full h-full fixed -z-10"
+          className="w-full h-full fixed -z-10 object-cover"
         />
 
       {/* Droplets Overlay - Only for Navy Blue */}
