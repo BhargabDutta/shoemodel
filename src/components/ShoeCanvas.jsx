@@ -7,7 +7,7 @@ import ShoeModel from "./ShoeModel";
 export default function ShoeCanvas({ sectionIndex, isMobile, variant,loadingManager }) {
   return (
     <Canvas
-      className="canvas-pointer-none fixed inset-0 -z-10 h-ful w-full"
+      className="pointer-events-none fixed inset-0 z-20 h-full w-full"
       camera={{ position: [0, 0, 6], fov: 35 }}
     >
       <ambientLight intensity={0.8} />

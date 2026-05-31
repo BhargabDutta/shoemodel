@@ -2,7 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import ShoeCanvas from "./components/ShoeCanvas";
 import Hero from "./components/Hero";
-import Section from "./components/Section";
+import Section1 from "./components/Section1";
+import Section2 from "./components/Section2";
+import Section3 from "./components/Section3";
+import Section4 from "./components/Section4";
+import Section5 from "./components/Section5";
+
+import steps from "./assets/steps.webm";
 import * as THREE from "three";
 
 const loadingManager = new THREE.LoadingManager();
@@ -13,31 +19,47 @@ export default function App() {
   const sectionRefs = useRef([]);
   const [variant, setVariant] = useState("classicRed"); // default variant
 
+  const minLoadingTimeRef = useRef(false);
+  const modelsLoadedRef = useRef(false);
+
 // In App.jsx
-useEffect(() => {
-  let loadedCount = 0;
-  const totalModels = 4;
+// Minimum 5 seconds loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      minLoadingTimeRef.current = true;
+      checkIfLoadingComplete();
+    }, 5000);
 
-  loadingManager.onStart = () => {
-    console.log("Loading started");
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
-  loadingManager.onProgress = (url, loaded, total) => {
-    console.log(`Progress: ${Math.round((loaded / total) * 100)}% - ${url}`);
-  };
+  // Loading Manager Setup
+  useEffect(() => {
+    loadingManager.onStart = () => console.log("Loading started");
+    
+    loadingManager.onProgress = (url, loaded, total) => {
+      console.log(`Progress: ${Math.round((loaded / total) * 100)}% - ${url}`);
+    };
 
-  loadingManager.onLoad = () => {
-    console.log("Manager says all items loaded");
-    // Small delay to let GLTF parsing finish
-    setTimeout(() => {
+    loadingManager.onLoad = () => {
+      console.log("All models loaded successfully");
+      modelsLoadedRef.current = true;
+      checkIfLoadingComplete();
+    };
+
+    loadingManager.onError = (url) => {
+      console.error(`Error loading: ${url}`);
+      modelsLoadedRef.current = true; // Don't hang forever on error
+      checkIfLoadingComplete();
+    };
+  }, []);
+
+  // Check if both minimum time and models are ready
+  const checkIfLoadingComplete = () => {
+    if (minLoadingTimeRef.current && modelsLoadedRef.current) {
       setIsLoading(false);
-    }, 300);
+    }
   };
-
-  loadingManager.onError = (url) => {
-    console.error(`Error loading: ${url}`);
-  };
-}, []);
   
 
   useEffect(() => {
@@ -63,67 +85,89 @@ useEffect(() => {
     return () => obs.disconnect();
   }, []);
 
-  const sections = [
-    { id: "hero", type: "hero", title: "The New Motion", subtitle: "Sculpted for speed and comfort.", cta: "" },
-    { id: "features", title: "Engineered Performance", subtitle: "Featherlight, breathable, responsive.", align: "right" },
-    { id: "materials", title: "Premium Materials", subtitle: "Sustainably sourced, long-lasting.", align: "left" },
-    { id: "cta", title: "Limited Release", subtitle: "Secure yours today.", align: "center" },
-  ];
-
   return (
     <>
-    {isLoading && (
-  <div className="fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-700">
-    <p className="text-white text-xl font-semibold animate-pulse">Loading...</p>
-  </div>
-)}
+      {isLoading && (
+        <div className="fixed inset-0 z-[999999] bg-black flex items-center justify-center overflow-hidden">
+          {/* Video Background */}
+          <video
+            src={steps}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute left-0 right-0 top-0 bottom-0 m-auto inset-0 w-48 h-auto object-cover opacity-70"
+          />
 
-    <div className={`relative min-h-screen text-white overflow-x-hidden transition-colors duration-500 ${
-      variant === "classicRed"
-        ? "bg-red-900"
-        : variant === "navyBlue"
-        ? "bg-blue-700"
-        : variant === "skyBlue"
-        ? "bg-sky-700"
-        : variant === "airZoom"
-        ? "bg-yellow-900"
-        : "bg-red-900" // fallback
-    }`}>
+          {/* Overlay Content */}
+          <div className="relative z-10 flex flex-col items-center">
+            <p className="text-white/60 mt-48 text-2xl">
+              Walking...
+            </p>
+          </div>
+        </div>
+      )}
+
+    <div className={`relative min-h-screen text-white overflow-x-hidden transition-colors duration-500`}>
     
-      <div className='fixed h-screen w-full'>
-      <ShoeCanvas 
-      sectionIndex={sectionIndex} 
-      isMobile={isMobile} 
-      variant={variant}
-      loadingManager={loadingManager}
-      />
+      <div className='fixed h-screen w-full z-20'>
+        <ShoeCanvas 
+        sectionIndex={sectionIndex} 
+        isMobile={isMobile} 
+        variant={variant}
+        loadingManager={loadingManager}
+        />
       </div>
 
-      <main className="relative z-10">
-        {sections.map((s, i) => (
-          <div
-            key={s.id}
-            ref={(el) => (sectionRefs.current[i] = el)}
-            data-index={i}
-          >
-            {s.type === "hero" ? (
-              <Hero 
-                title={s.title} 
-                subtitle={s.subtitle} 
-                cta={s.cta}
-                variant={variant}
-                setVariant={setVariant}
-                 />
-            ) : (
-              <Section
-                title={s.title}
-                subtitle={s.subtitle}
-                align={s.align}
-              />
-            )}
-          </div>
-        ))}
+      <main className="relative">
+
+        <div
+          ref={(el) => (sectionRefs.current[0] = el)}
+          data-index={0}
+        >
+          <Hero
+            variant={variant}
+            setVariant={setVariant}
+          />
+        </div>
+
+        <div 
+          ref={(el) => (sectionRefs.current[1] = el)}
+          data-index={1}
+        >
+          <Section1 variant={variant}/>
+        </div>
+
+        <div
+          ref={(el) => (sectionRefs.current[2] = el)}
+          data-index={2}
+        >
+          <Section2 variant={variant}/>
+        </div>
+
+        <div
+          ref={(el) => (sectionRefs.current[3] = el)}
+          data-index={3}
+        >
+          <Section3 variant={variant}/>
+        </div>
+
+        <div
+          ref={(el) => (sectionRefs.current[4] = el)}
+          data-index={4}
+        >
+          <Section4 variant={variant}/>
+        </div>
+
+        <div
+          ref={(el) => (sectionRefs.current[5] = el)}
+          data-index={5}
+        >
+          <Section5 variant={variant}/>
+        </div>
+
       </main>
+
     </div>
     </>
   );

@@ -44,7 +44,7 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     classicRed: [0, 0, 0],
     navyBlue: [0, 0, 0],
     skyBlue: [0, 0, 0],
-    airZoom: [0, Math.PI, 0],
+    airZoom: [0, 0, 0],
   };
   
   
@@ -76,24 +76,103 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
   }, [variant, redModel, blueModel, greenModel, yellowModel]);
 
   // Transforms per section
-  const desktopTransforms = [
-    { position: [0, -0.2, 0], rotation: [0, 0, 0], scale: 2 },
-    { position: [-2, -0.2, 0], rotation: [0, 1, 0], scale: 2 },
-    { position: [2, 0, 0], rotation: [1, -1, 0.5], scale: 2 },
-    { position: [0, -0.25, 0], rotation: [-0.1, Math.PI, 0], scale: 1.8 },
-  ];
+  // const desktopTransforms = [
+  //   { position: [0, -0.1, 1], rotation: [0, 1.5, 0], scale: 2 },
+  //   { position: [-2, -0.2, 0], rotation: [0, 1, 0], scale: 2 },
+  //   { position: [2, 0, 0], rotation: [1, -1, 0.5], scale: 2 },
+  //   { position: [0, -0.25, 0], rotation: [-0.1, Math.PI, 0], scale: 1.8 },
+  // ];
   
-  const mobileTransforms = [
-    { position: [0, -0.1, 0], rotation: [0, 0, 0], scale: 2 },
-    { position: [0, -0.1, 0], rotation: [1, 0, 0], scale: 2.5 },
-    { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 3 },
-    { position: [0, -0.15, 0], rotation: [0, Math.PI, 0], scale: 1 },
-  ];
-  const transforms = isMobile ? mobileTransforms : desktopTransforms;
-  // const current = transforms[sectionIndex] || transforms[0];  
+  // const mobileTransforms = [
+  //   { position: [0, -0.1, 0], rotation: [0, 0, 0], scale: 2 },
+  //   { position: [0, -0.1, 0], rotation: [1, 0, 0], scale: 2.5 },
+  //   { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 3 },
+  //   { position: [0, -0.15, 0], rotation: [0, Math.PI, 0], scale: 1 },
+  // ];
+
+  const variantTransforms = {
+  classicRed: {
+    desktop: [
+      { position: [0, -0.1, 1], rotation: [0, 1.5, 0], scale: 2 },
+      { position: [-2, -0.2, 0], rotation: [0, 1, 0], scale: 2 },
+      { position: [2, 0, 0], rotation: [1, -1, 0.5], scale: 2 },
+      { position: [0, 0.3, 1], rotation: [0.5, 0.5, 0], scale: 1.8 },
+      { position: [1, 0.3, 1], rotation: [-1, 1, 0], scale: 1.8 },
+      { position: [-0.5, 0, 1], rotation: [0, 2.5, 0], scale: 1.8 },
+
+    ],
+
+    mobile: [
+      { position: [0, -0.1, 0], rotation: [0, 0, 0], scale: 2 },
+      { position: [0, -0.1, 0], rotation: [1, 0, 0], scale: 2.5 },
+      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 3 },
+      { position: [0, -0.15, 0], rotation: [0, Math.PI, 0], scale: 1 },
+    ]
+  },
+
+  navyBlue: {
+    desktop: [
+      { position: [0, -0.1, 2], rotation: [0, 1.5, 0], scale: 1.7 },
+      { position: [-1.5, 0, 3], rotation: [0, 1.5, 0], scale: 1.7 },
+      { position: [1, 0, 1], rotation: [0, 1, 0], scale: 1.7 },
+      { position: [0, 0, 1], rotation: [1, 1, 0], scale: 1.5 },
+      { position: [1, 0, 1], rotation: [0.5, -1, 0], scale: 1.5 },
+      { position: [0, 0.3, 1], rotation: [-1, 1, 0], scale: 1.8 },
+
+    ],
+
+    mobile: [
+      { position: [0, -0.2, 0], rotation: [0, 0, 0], scale: 2 },
+      { position: [0, -0.2, 0], rotation: [0.8, 0, 0], scale: 2 },
+      { position: [0, 0, 0], rotation: [0.3, -0.8, 0], scale: 2.5 },
+      { position: [0, -0.2, 0], rotation: [0, Math.PI, 0], scale: 1.5 },
+    ]
+  },
+
+  skyBlue: {
+    desktop: [
+      { position: [0, 0.2, 1], rotation: [0.3, 1.2, 0], scale: 2.3 },
+      { position: [-2.5, 0, 0], rotation: [0, 1, 0], scale: 2.3 },
+      { position: [2.5, 0, 0], rotation: [0.8, -1, 0], scale: 2.3 },
+      { position: [0, 0, 1], rotation: [-1, 1, 0], scale: 1.8 },
+      { position: [1, 0.2, 1.5], rotation: [0, 0.5, 0], scale: 1.8 },
+      { position: [0, 0.2, 1.5], rotation: [0, 1.5, 0], scale: 2.3 },
+    ],
+
+    mobile: [
+      { position: [0, 0, 0], rotation: [0, 0, 0], scale: 2.5 },
+      { position: [0, 0, 0], rotation: [1, 0, 0], scale: 2.5 },
+      { position: [0, 0, 0], rotation: [0.5, -1, 0], scale: 3 },
+      { position: [0, 0, 0], rotation: [0, Math.PI, 0], scale: 2 },
+    ]
+  },
+
+  airZoom: {
+    desktop: [
+      { position: [0, -0.1, 3], rotation: [0, 1.5, 0], scale: 1.4 },
+      { position: [-1.5, -0.5, 1], rotation: [0, 2.7, 0], scale: 1.4 },
+      { position: [1, -0.3, 2], rotation: [1, -2, 0], scale: 1.4 },
+      { position: [0, -0.1, 3], rotation: [0.3, -2.5, 0], scale: 1.2 },
+      { position: [1, 0, 1.5], rotation: [-1, 2, 0], scale: 1.8 },
+      { position: [0, 0, 1.5], rotation: [-1.5, 2, 0], scale: 1.8 },
+
+    ],
+
+    mobile: [
+      { position: [0, -0.3, 0], rotation: [0, 0, 0], scale: 1.6 },
+      { position: [0, -0.3, 0], rotation: [1, 0, 0], scale: 1.6 },
+      { position: [0, -0.2, 0], rotation: [0.5, -0.5, 0], scale: 2 },
+      { position: [0, -0.3, 0], rotation: [0, Math.PI, 0], scale: 1.3 },
+    ]
+  }
+};
+const transforms = isMobile
+  ? variantTransforms[variant].mobile
+  : variantTransforms[variant].desktop;
+
+const current = transforms[sectionIndex] || transforms[0]; 
 
   const scaleFactor = isMobile ? 0.7 : 1;
-  const current = transforms[sectionIndex] || transforms[0];
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -149,7 +228,7 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
       <group ref={groupRef} key={variant}>
         <primitive object={sceneObj} dispose={null} />
       </group>
-      <OrbitControls />
+      {/* <OrbitControls /> */}
     </>
   );
 }
