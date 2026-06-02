@@ -19,13 +19,7 @@ export default function Section5({ variant }) {
   </h2>
 </div>
 
-    <p className="text-3xl text-white/70 mb-16">{content.subtitle}</p>
-    
-    <button className="px-16 py-6 bg-white text-black font-bold text-xl rounded-full hover:scale-105 transition-transform">
-      Choose Your Color
-    </button>
-
-    <p className="mt-12 text-white/50 text-lg tracking-widest">{content.highlight}</p>
+    <p className="absolute bottom-0 left-0 right-0 mb-10 text-white/50 text-lg tracking-widest">{content.highlight}</p>
   </div>
 </section>
     );

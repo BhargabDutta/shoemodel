@@ -103,10 +103,12 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     ],
 
     mobile: [
-      { position: [0, -0.1, 0], rotation: [0, 0, 0], scale: 2 },
-      { position: [0, -0.1, 0], rotation: [1, 0, 0], scale: 2.5 },
-      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 3 },
-      { position: [0, -0.15, 0], rotation: [0, Math.PI, 0], scale: 1 },
+      { position: [0, 0, 3], rotation: [0.5, 0, 0], scale: 2 },
+      { position: [0, -1, -2], rotation: [-1.5, 0, 1.5], scale: 2 },
+      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 2 },
+      { position: [0, 0, 0], rotation: [0, 1.5, 0], scale: 1 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
     ]
   },
 
@@ -122,10 +124,12 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     ],
 
     mobile: [
-      { position: [0, -0.2, 0], rotation: [0, 0, 0], scale: 2 },
-      { position: [0, -0.2, 0], rotation: [0.8, 0, 0], scale: 2 },
-      { position: [0, 0, 0], rotation: [0.3, -0.8, 0], scale: 2.5 },
-      { position: [0, -0.2, 0], rotation: [0, Math.PI, 0], scale: 1.5 },
+      { position: [0, 0, 3], rotation: [0.5, 0, 0], scale: 2 },
+      { position: [0, -1, -2], rotation: [-1.5, 0, 1.5], scale: 2 },
+      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 2 },
+      { position: [0, 0, 0], rotation: [0, 1.5, 0], scale: 1 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
     ]
   },
 
@@ -140,10 +144,12 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     ],
 
     mobile: [
-      { position: [0, 0, 0], rotation: [0, 0, 0], scale: 2.5 },
-      { position: [0, 0, 0], rotation: [1, 0, 0], scale: 2.5 },
-      { position: [0, 0, 0], rotation: [0.5, -1, 0], scale: 3 },
-      { position: [0, 0, 0], rotation: [0, Math.PI, 0], scale: 2 },
+      { position: [0, 0, 3], rotation: [0.5, 0, 0], scale: 2 },
+      { position: [0, -1, -2], rotation: [-1.5, 0, 1.5], scale: 2 },
+      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 2 },
+      { position: [0, 0, 0], rotation: [0, 1.5, 0], scale: 1 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
     ]
   },
 
@@ -159,10 +165,12 @@ const yellowModel = useLoader(GLTFLoader, "/models/nike_air_zoom.glb", loader =>
     ],
 
     mobile: [
-      { position: [0, -0.3, 0], rotation: [0, 0, 0], scale: 1.6 },
-      { position: [0, -0.3, 0], rotation: [1, 0, 0], scale: 1.6 },
-      { position: [0, -0.2, 0], rotation: [0.5, -0.5, 0], scale: 2 },
-      { position: [0, -0.3, 0], rotation: [0, Math.PI, 0], scale: 1.3 },
+      { position: [0, 0, 3], rotation: [0.5, 0, 0], scale: 2 },
+      { position: [0, -1, -2], rotation: [-1.5, 0, 1.5], scale: 2 },
+      { position: [0, 0, 0], rotation: [0.5, -0.5, 0.2], scale: 2 },
+      { position: [0, 0, 0], rotation: [0, 1.5, 0], scale: 1 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
+      { position: [0, 0, 0], rotation: [-0.5, -0.5, 0.3], scale: 2 },
     ]
   }
 };
