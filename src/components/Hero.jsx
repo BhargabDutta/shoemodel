@@ -1,25 +1,25 @@
 // src/components/Hero.jsx
 import { useMemo, useState, useRef, useEffect } from "react";
-import redbg from "../assets/red_bg.png";
-import navybg from "../assets/navy_bg.png";
-import skybg from "../assets/sky_bg.png";
-import drops from "../assets/water_drops.png";
-import airbg from "../assets/air_bg.png";
+import redbg from "../assets/red_bg.webp";
+import navybg from "../assets/navy_bg.webp";
+import skybg from "../assets/sky_bg.webp";
+import drops from "../assets/water_drops.webp";
+import airbg from "../assets/air_bg.webp";
 
-import redbgMobile from "../assets/red_bg_mobile.png";
-import navybgMobile from "../assets/navy_bg_mobile.png";
-import skybgMobile from "../assets/sky_bg_mobile.png";
-import airbgMobile from "../assets/air_bg_mobile.png";
+import redbgMobile from "../assets/red_bg_mobile.webp";
+import navybgMobile from "../assets/navy_bg_mobile.webp";
+import skybgMobile from "../assets/sky_bg_mobile.webp";
+import airbgMobile from "../assets/air_bg_mobile.webp";
 
-import waves from "../assets/waves.png";
-import wavesbottom from "../assets/waves2.png";
+import waves from "../assets/waves.webp";
+import wavesbottom from "../assets/waves2.webp";
 
-import zap1 from "../assets/zap1.png";
-import zap2 from "../assets/zap2.png";
+import zap1 from "../assets/zap1.webp";
+import zap2 from "../assets/zap2.webp";
 
-import leaves1 from "../assets/float_leaves.png";
-import tree from "../assets/tree_top.png";
-import leaves3 from "../assets/leaves_float2.png";
+import leaves1 from "../assets/float_leaves.webp";
+import tree from "../assets/tree_top.webp";
+import leaves3 from "../assets/leaves_float2.webp";
 
 import useMouseParallax from "../hooks/useMouseParallax";
 
